@@ -86,6 +86,14 @@
         <activity
             android:name=".TestActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".hotpoint.HotPointActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

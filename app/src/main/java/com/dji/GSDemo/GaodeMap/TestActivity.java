@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dji.GSDemo.GaodeMap.hotpoint.HotPointActivity;
+import com.dji.GSDemo.GaodeMap.login.LoginActivity;
+
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Button mLoginButton;
     private Button mWayPointButton;
     private Button mHotPointButton;
     private Button mVirtualStickyButton;
@@ -25,6 +29,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        mLoginButton = findViewById(R.id.btn_login);
         mWayPointButton = findViewById(R.id.btn_way_point);
         mHotPointButton = findViewById(R.id.btn_hot_point);
         mVirtualStickyButton = findViewById(R.id.btn_virtual_sticky_point);
@@ -32,6 +37,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setListener() {
+        mLoginButton.setOnClickListener(this);
         mWayPointButton.setOnClickListener(this);
         mHotPointButton.setOnClickListener(this);
         mVirtualStickyButton.setOnClickListener(this);
@@ -41,12 +47,17 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_login:
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                startActivity(loginIntent);
+                break;
             case R.id.btn_way_point:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent wayPointIntent = new Intent(this, MainActivity.class);
+                startActivity(wayPointIntent);
                 break;
             case R.id.btn_hot_point:
-                showToast("hot point");
+                Intent hotPointIntent = new Intent(this, HotPointActivity.class);
+                startActivity(hotPointIntent);
                 break;
             case R.id.btn_virtual_sticky_point:
                 showToast("virtual sticky");
