@@ -394,11 +394,44 @@ public class CameraActivity extends AppCompatActivity implements SurfaceTextureL
         }
     }
 
-    // Method for taking photo
+    /**
+     * 拍照方法
+     * 1、云台90度朝下
+     * 2、设置相机快门优先
+     * 3、设置快门时间（比正常的快门设置的时间要长）
+     */
     private void captureAction(){
+        // 云台90度朝下
+        rotateGimbalToMin(CapabilityKey.ADJUST_PITCH);
 
         final Camera camera = DJIDemoApplication.getCameraInstance();
         if (camera != null) {
+            // 设置相机曝光为快门优先
+            camera.setExposureMode(SettingsDefinitions.ExposureMode.SHUTTER_PRIORITY, new CommonCallbacks.CompletionCallback() {
+                @Override
+                public void onResult(DJIError djiError) {
+                    if (djiError == null) {
+                        ToastUtils.setResultToToast("快门优先设置成功");
+                    } else {
+                        ToastUtils.setResultToToast("快门优先设置失败");
+                    }
+                }
+            });
+
+            // 设置快门的速度
+            camera.setShutterSpeed(SettingsDefinitions.ShutterSpeed.SHUTTER_SPEED_1_50, new CommonCallbacks.CompletionCallback() {
+                @Override
+                public void onResult(DJIError djiError) {
+                    if (djiError == null) {
+                        ToastUtils.setResultToToast("快门速度设置成功");
+                    } else {
+                        ToastUtils.setResultToToast("快门速度设置失败");
+                    }
+                }
+            });
+
+
+            // TODO: 2019-06-14 理论需要检测等所有的状态都设置完成后，再执行 startShootPhoto 操作
 
             SettingsDefinitions.ShootPhotoMode photoMode = SettingsDefinitions.ShootPhotoMode.SINGLE; // Set the camera capture mode as Single mode
             camera.setShootPhotoMode(photoMode, new CommonCallbacks.CompletionCallback(){
@@ -419,7 +452,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceTextureL
                                     }
                                 });
                             }
-                        }, 2000);
+                        }, 5000);
                     }
                 }
             });
