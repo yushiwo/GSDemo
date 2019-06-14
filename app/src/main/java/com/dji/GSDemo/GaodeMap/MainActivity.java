@@ -57,6 +57,9 @@ import dji.sdk.products.Aircraft;
 import dji.sdk.sdkmanager.DJISDKManager;
 import dji.sdk.useraccount.UserAccountManager;
 
+/**
+ * 实现waypiont和图传现实功能
+ */
 public class MainActivity extends FragmentActivity implements View.OnClickListener, OnMapClickListener, TextureView.SurfaceTextureListener {
 
     protected static final String TAG = "MainActivity";

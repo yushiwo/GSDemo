@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dji.GSDemo.GaodeMap.camera.CameraActivity;
 import com.dji.GSDemo.GaodeMap.hotpoint.HotPointActivity;
 import com.dji.GSDemo.GaodeMap.login.LoginActivity;
+import com.dji.GSDemo.GaodeMap.virtualsticky.VirtualStickyActivity;
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,10 +62,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(hotPointIntent);
                 break;
             case R.id.btn_virtual_sticky_point:
-                showToast("virtual sticky");
+                Intent virtualStickyIntent = new Intent(this, VirtualStickyActivity.class);
+                startActivity(virtualStickyIntent);
                 break;
             case R.id.btn_way_camera:
-                showToast("camera");
+                Intent cameraIntent = new Intent(this, CameraActivity.class);
+                startActivity(cameraIntent);
                 break;
             default:
                 break;

@@ -36,6 +36,11 @@ import static dji.common.mission.hotpoint.HotpointStartPoint.EAST;
  * hotPoint的执行过程是，先拿到operator，然后设置mission任务，然后start执行任务
  * <p>
  * 与wayPoint不同的是，wayPoit是先upload到aircraft，然后再执行mission任务，无需takeoff
+ * <p>
+ * 1、先take off
+ * 2、hotpoint mission A （定时一圈，时间到结束mission）
+ * 3、hotpoint mission B （定时一圈，时间到结束mission）
+ * 4、startGoHome 返回起飞点
  */
 public class HotPointActivity extends AppCompatActivity {
 
