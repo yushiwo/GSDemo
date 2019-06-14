@@ -406,6 +406,10 @@ public class CameraActivity extends AppCompatActivity implements SurfaceTextureL
 
         final Camera camera = DJIDemoApplication.getCameraInstance();
         if (camera != null) {
+
+
+            // 实际要看是否需要串行设计
+
             // 设置相机曝光为快门优先
             camera.setExposureMode(SettingsDefinitions.ExposureMode.SHUTTER_PRIORITY, new CommonCallbacks.CompletionCallback() {
                 @Override

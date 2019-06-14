@@ -205,8 +205,9 @@ public class VirtualStickyActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (mFlightController != null) {
-                mPitch = 1.0f;
-                mRoll = 1.0f;
+                mPitch = mPitch + 0.1f;
+                mRoll = mRoll + 0.1f;
+                mYaw = mYaw + 1f;
                 mFlightController.sendVirtualStickFlightControlData(
                         new FlightControlData(
                                 mPitch, mRoll, mYaw, mThrottle
