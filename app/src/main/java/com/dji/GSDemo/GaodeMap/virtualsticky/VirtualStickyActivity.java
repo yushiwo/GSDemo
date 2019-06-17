@@ -1,5 +1,6 @@
 package com.dji.GSDemo.GaodeMap.virtualsticky;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -113,6 +114,7 @@ public class VirtualStickyActivity extends AppCompatActivity {
                 break;
             case R.id.start_fly:
                 startFly();
+                countDownTimerA.start();
                 break;
         }
     }
@@ -205,9 +207,12 @@ public class VirtualStickyActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (mFlightController != null) {
-                mPitch = mPitch + 0.1f;
-                mRoll = mRoll + 0.1f;
-                mYaw = mYaw + 1f;
+//                mPitch = (mPitch + 0.1f) % 30;
+//                mRoll = (mRoll + 0.1f) % 30;
+//                mYaw = (mYaw + 0.3f) % 180;
+                mPitch = 5;
+                mRoll = 5;
+                mYaw = getYaw();
                 mFlightController.sendVirtualStickFlightControlData(
                         new FlightControlData(
                                 mPitch, mRoll, mYaw, mThrottle
@@ -221,5 +226,35 @@ public class VirtualStickyActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * 获取持续旋转变化的yaw值
+     * @return
+     */
+    private float getYaw() {
+        float realYaw = 0.0f;
+        mYaw = mYaw + 1.0f;
+        realYaw = mYaw % 360;
+        if (realYaw > 180) {
+            realYaw = realYaw - 360;
+        }
+
+        return realYaw;
+    }
+
+    private CountDownTimer countDownTimerA = new CountDownTimer(360 / 5 * 1000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+        }
+
+        @Override
+        public void onFinish() {
+            countDownTimerA.cancel();
+            countDownTimerA.start();
+            mPitch = 0.0f;
+            mRoll = 0.0f;
+            mYaw = 0.0f;
+        }
+    };
 
 }
