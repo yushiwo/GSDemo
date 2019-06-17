@@ -114,7 +114,6 @@ public class VirtualStickyActivity extends AppCompatActivity {
                 break;
             case R.id.start_fly:
                 startFly();
-                countDownTimerA.start();
                 break;
         }
     }
